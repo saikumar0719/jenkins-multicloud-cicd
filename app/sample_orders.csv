@@ -1,0 +1,12 @@
+order_id,customer,product,amount
+1001,Priya Sharma,Bag,500
+1002,Ravi Kumar,Shoes,1200
+1003,Anita Rao,Watch,2500
+1001,Priya Sharma,Bag,550
+1004,John Mathew,Bag,
+1005,Sara Thomas,Hat,-200
+1006,Ravi Kumar,Hat,300
+1007,Anita Rao,Shoes,1500
+1008,John Mathew,Watch,2500
+1009,Priya Sharma,Shoes,1400
+1010,Sara Thomas,Bag,600
