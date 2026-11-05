@@ -1,0 +1,26 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: .
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - run: python -m pytest -q
+      - run: bash -n scripts/deploy_aws.sh scripts/deploy_azure.sh scripts/deploy_gcp.sh
+      - run: python -m py_compile app/*.py tests/*.py
+      - name: Dry-run deploys (no cloud, no cost)
+        env:
+          DRY_RUN: "true"
+        run: |
+          bash scripts/deploy_aws.sh
+          bash scripts/deploy_azure.sh
+          bash scripts/deploy_gcp.sh
+          cat logs/deploy-aws.json logs/deploy-azure.json logs/deploy-gcp.json
